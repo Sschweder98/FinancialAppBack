@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Xml;
+using System.IO;
 
 namespace financial
 {
@@ -34,6 +35,49 @@ namespace financial
         private static void Initialize()
         {
             database = new FinancialContext();
+        }
+
+    }
+
+    public class csvManager{
+        private StreamReader reader;
+        private List<ksk_csv_row> ksk_csv = new List<ksk_csv_row>();
+        public void loadCSV(String file){
+            ksk_csv.Clear();
+            reader = new StreamReader(file);
+            while (reader.Peek() >= 0){
+                analyse_line(reader.ReadLine());
+            }
+
+        }
+
+        private void analyse_line(String line){
+            string[] line_arr = line.Split(";");
+            for (int i = 1; i <= line_arr.Length - 1; i++){
+                ksk_csv.Add(new ksk_csv_row(){Auftragskonto = line_arr[i]});
+            }
+        }
+
+        public class ksk_csv_row{
+
+            public string Auftragskonto { get; set; }
+            public string Buchungstag { get; set; }
+            public string Valutadatum { get; set; }
+            public string Buchungstext { get; set; }
+            public string Verwendungszweck { get; set; }
+            public string Glaeubiger_ID { get; set; }
+            public string Mandatsreferenz { get; set; }
+            public string Kundenreferenz__End_to_End_ { get; set; }
+            public string Sammlerreferenz { get; set; }
+            public string Lastschrift_Ursprungsbetrag { get; set; }
+            public string Auslagenersatz_Ruecklastschrift { get; set; }
+            public string Beguenstigter_Zahlungspflichtiger { get; set; }
+            public string Kontonummer_IBAN { get; set; }
+            public string BIC__SWIFT_Code_ { get; set; }
+            public string Betrag { get; set; }
+            public string Waehrung { get; set; }
+            public string Info { get; set; }
+
         }
 
     }
