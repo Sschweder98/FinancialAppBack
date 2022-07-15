@@ -321,8 +321,8 @@ namespace financial
 
         public Boolean isFixed(finance_data _Data)
         {
-            if (_Data.category == "Kredit" || _Data.category == "Versicherung" || _Data.category == "Abonnements")
-            {
+            if (_Data.category == "Kredit" || _Data.category == "Versicherung" || _Data.category == "Abonnements" || _Data.category == "Mobilfunk" || 
+            _Data.category == "Gehalt" || _Data.category == "Hausverwaltung" || _Data.category == "Hausverwaltung"){
                 return true;
             }
             else{
