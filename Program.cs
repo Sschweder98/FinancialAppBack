@@ -27,6 +27,7 @@ namespace financial
             foreach (var entry in database._finance_data)
             {
                 Console.WriteLine(entry.recipient1);
+                Console.WriteLine(entry.recipient2);
             }
         }
 
