@@ -12,7 +12,7 @@ namespace financial
 
         static void Main(string[] args)
         {
-           
+            
         }
 
 
@@ -24,7 +24,7 @@ namespace financial
         public DbSet<finance_categories> _finance_categories {get; set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
-            String connectionString = "";
+            String connectionString = get_conn_from_xml();
             var serverVersion= new MySqlServerVersion(new Version(8,0,27));
             optionsBuilder.UseMySql(connectionString, serverVersion, o => o
             .MinBatchSize(1)
