@@ -10,17 +10,14 @@ namespace financial
     class Program
     {
         private static FinancialContext database;
+        private static csvManager _csvManager = new csvManager();
+        private static dataMapper _dataMapper = new dataMapper();
 
         static void Main(string[] args)
         {
             Initialize();
-            getEntries();
-
-        }
-
-        private static void LoadEntriesToDB()
-        {
-
+            _csvManager.loadCSV("C:\\Users\\sschw\\Downloads\\kskwn_export.CSV");
+            _dataMapper.map_csvData_to_finance_data(_csvManager.ksk_csv, ref database);
         }
 
         private static void getEntries()
@@ -39,26 +36,89 @@ namespace financial
 
     }
 
-    public class csvManager{
+    public class dataMapper
+    {
+        public void map_csvData_to_finance_data(List<csvManager.ksk_csv_row> csv_data, ref FinancialContext database)
+        {
+            foreach (csvManager.ksk_csv_row row in csv_data)
+            {
+                String unqiue = GenerateKey(row);
+                Int32 Count = (from finance_data tmp in database._finance_data where tmp.uniqe_key == unqiue select tmp).Count();
+                if (Count == 0)
+                {
+                    //Create Entry
+
+                }
+            }
+        }
+
+        public string GenerateKey(csvManager.ksk_csv_row row)
+        {
+            //date
+            String unique = row.Buchungstag.Replace(".", "");
+            //name of recipient
+            unique += "_" + row.Beguenstigter_Zahlungspflichtiger.ToLower().Replace(" ", "_").Substring(0, 5);
+            //iban of recipient
+            if (row.Kontonummer_IBAN.Length >= 5)
+            {
+                unique += "_" + row.Kontonummer_IBAN.Substring(0, 5);
+            }
+            else
+            {
+                unique += "XXXXX";
+            }
+            //value
+            unique += "_" + row.Betrag.Replace("_", "").Replace(",", "X");
+            return unique;
+        }
+    }
+
+    public class csvManager
+    {
         private StreamReader reader;
-        private List<ksk_csv_row> ksk_csv = new List<ksk_csv_row>();
-        public void loadCSV(String file){
+        public List<ksk_csv_row> ksk_csv = new List<ksk_csv_row>();
+        public void loadCSV(String file)
+        {
             ksk_csv.Clear();
             reader = new StreamReader(file);
-            while (reader.Peek() >= 0){
+            while (reader.Peek() >= 0)
+            {
                 analyse_line(reader.ReadLine());
             }
 
         }
 
-        private void analyse_line(String line){
-            string[] line_arr = line.Split(";");
-            for (int i = 1; i <= line_arr.Length - 1; i++){
-                ksk_csv.Add(new ksk_csv_row(){Auftragskonto = line_arr[i]});
+        private void analyse_line(String line)
+        {
+            if (line.Contains("Auftragskonto"))
+            {
+                return;
             }
+            string[] line_arr = line.Split(";");
+            ksk_csv.Add(new ksk_csv_row()
+            {
+                Auftragskonto = line_arr[0],
+                Buchungstag = line_arr[1],
+                Valutadatum = line_arr[2],
+                Buchungstext = line_arr[3],
+                Verwendungszweck = line_arr[4],
+                Glaeubiger_ID = line_arr[5],
+                Mandatsreferenz = line_arr[6],
+                Kundenreferenz__End_to_End_ = line_arr[7],
+                Sammlerreferenz = line_arr[8],
+                Lastschrift_Ursprungsbetrag = line_arr[9],
+                Auslagenersatz_Ruecklastschrift = line_arr[10],
+                Beguenstigter_Zahlungspflichtiger = line_arr[11],
+                Kontonummer_IBAN = line_arr[12],
+                BIC__SWIFT_Code_ = line_arr[13],
+                Betrag = line_arr[14],
+                Waehrung = line_arr[15],
+                Info = line_arr[16]
+            });
         }
 
-        public class ksk_csv_row{
+        public class ksk_csv_row
+        {
 
             public string Auftragskonto { get; set; }
             public string Buchungstag { get; set; }

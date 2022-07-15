@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sschw\\OneDrive\\Uralt\\Dokumente_sehrAlt\\git_repo\\financial_app\\financial_app.csproj": {}
+    "C:\\Users\\sschw\\Documents\\DotNET\\financial_app\\financial_app.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sschw\\OneDrive\\Uralt\\Dokumente_sehrAlt\\git_repo\\financial_app\\financial_app.csproj": {
+    "C:\\Users\\sschw\\Documents\\DotNET\\financial_app\\financial_app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sschw\\OneDrive\\Uralt\\Dokumente_sehrAlt\\git_repo\\financial_app\\financial_app.csproj",
+        "projectUniqueName": "C:\\Users\\sschw\\Documents\\DotNET\\financial_app\\financial_app.csproj",
         "projectName": "financial_app",
-        "projectPath": "C:\\Users\\sschw\\OneDrive\\Uralt\\Dokumente_sehrAlt\\git_repo\\financial_app\\financial_app.csproj",
+        "projectPath": "C:\\Users\\sschw\\Documents\\DotNET\\financial_app\\financial_app.csproj",
         "packagesPath": "C:\\Users\\sschw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sschw\\OneDrive\\Uralt\\Dokumente_sehrAlt\\git_repo\\financial_app\\obj\\",
+        "outputPath": "C:\\Users\\sschw\\Documents\\DotNET\\financial_app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sschw\\AppData\\Roaming\\NuGet\\NuGet.Config",
