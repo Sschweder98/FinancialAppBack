@@ -8,13 +8,45 @@ namespace financial
 {
     class Program
     {
-        private FinancialContext database = new FinancialContext();
+        private static FinancialContext database; 
 
         static void Main(string[] args)
         {
-            
+            Initialize();
+            getEntries();
+
         }
 
+        private static void LoadEntriesToDB(){
+
+        }
+
+        private static void getEntries(){
+            foreach (var entry in database._finance_data){
+                Console.WriteLine(entry.recipient1);
+            }
+        }
+
+        private static void Initialize(){
+            database = new FinancialContext();
+        }
+
+
+    }
+
+    public class categoryManager{
+        public List<finance_categories> categories;
+
+        public categoryManager(List<finance_categories> _categories){
+            categories = _categories;
+        }
+
+        public finance_categories findCategory(finance_data _Data){
+            if (_Data.description1.Contains("AGIP")){
+                return (from tmp in categories where tmp.category_name == "Tankstelle" select tmp).FirstOrDefault();
+            }
+            return null;
+        }
 
 
     }
