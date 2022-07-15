@@ -65,6 +65,10 @@ namespace financial_app.Migrations
                     b.Property<int>("recipient2")
                         .HasColumnType("int");
 
+                    b.Property<string>("uniqe_key")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<double>("value")
                         .HasColumnType("double");
 

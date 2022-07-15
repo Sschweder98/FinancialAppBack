@@ -11,7 +11,7 @@ using financial;
 namespace financial_app.Migrations
 {
     [DbContext(typeof(FinancialContext))]
-    [Migration("20220715120348_finance_app_migration")]
+    [Migration("20220715124103_finance_app_migration")]
     partial class finance_app_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,6 +66,10 @@ namespace financial_app.Migrations
 
                     b.Property<int>("recipient2")
                         .HasColumnType("int");
+
+                    b.Property<string>("uniqe_key")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<double>("value")
                         .HasColumnType("double");
