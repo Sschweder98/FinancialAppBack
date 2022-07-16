@@ -208,7 +208,7 @@ namespace financial
                 if (_Data.description1.ToLower().Contains("gehalt")){
                     return getCategoryByName("Gehalt");
                 }
-                else if (_Data.description2.Contains("miete")){
+                else if (_Data.description2.ToLower().Contains("miete")){
                     return getCategoryByName("Mieteinnahmen");
                 }
                 else{
